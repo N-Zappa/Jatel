@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <meta name="My profile" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #111111;
+        }
+        .styletext{
+            font-size: 80px;
+            font-weight: bold;
+            position: fixed; top: 35%;
+            color: #d7d7d7;
+        }
+
+        .header {
+            overflow: hidden;
+            background-color: #111111;
+            padding: 20px 10px;
+        }
+
+        .header a {
+            float: left;
+            color: #d7d7d7;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 18px;
+            line-height: 25px;
+            border-radius: 4px;
+        }
+
+        .header a.logo {
+            font-size: 40px;
+            font-weight: bold;
+            color: #d7d7d7;
+        }
+
+        .header a:hover {
+            background-color: #111111;
+            color: #8925c0;
+        }
+
+        .header-right {
+            float: right;
+        }
+        .button {
+            font: 1em Arial, sans-serif;
+            display: inline-block;
+            padding: 12px;
+            text-decoration: none;
+            color: #111111;
+            background-image: linear-gradient(#8925c0, rgba(137, 37, 192, 0.99)), linear-gradient(#111111, #111111);
+            background-size: 0 5px, auto;
+            background-repeat: no-repeat;
+            background-position: center bottom;
+            transition: all .2s ease-out;
+        }
+
+        .button:hover {
+            background-size: 100% 5px, auto;
+            color: #806993;
+            text-decoration: none;
+            text-decoration-color: #8925c0;
+        }
+
+        @media screen and (max-width: 650px) {
+            .header a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
+            .header-right {
+                float: none;
+            }
+        }
+        * {
+            box-sizing: border-box;
+        }
+        .registerbtn {
+            background-color: #400e96;
+            color: white;
+            padding: 20px 20px 20px;
+            margin: 0 auto;
+            display: block;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            width: 25%;
+            opacity: 0.8;
+            text-decoration: none;
+        }
+
+        .registerbtn:hover {
+            opacity: 1;
+        }
+
+        a {
+            color: #5412bb;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <a href="/homepage" class="logo">Jatel</a>
+    <div class="header-right">
+        <a class="button" th:if="${AuthorizedUser}!=null" th:href="'/person/'+${AuthorizedUser.getId()}+'/profile'">My Profile</a>
+        <a class="button" href="/homepage">Home</a>
+        <a class="button" href="/blog">Posts</a>
+        <a class="button" href="/aboutJatel">About</a>
+        <a class="button" href="/logout">Logout</a>
+    </div>
+</div>
+<div>
+    <h1 style="text-align: center; color: #d7d7d7; font-size: 80px">JATEL</h1>
+    <h1 style="text-align: center; top: 40%; color: #c2c1c1; font-size: 20px">Create | Get inspired | Enjoy</h1>
+    <a class="registerbtn" style="position: fixed; top: 60%; left: 20%;" href="/addblog">Post something</a>
+    <a class="registerbtn" style="position: fixed; top: 60%; right: 20%;" href="/blog">Watch out posts</a>
+</div>
+</body>
+</html>

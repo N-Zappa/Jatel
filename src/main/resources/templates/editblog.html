@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit</title>
+    <meta name="My profile" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #111111;
+        }
+        .styletext{
+            font-size: 80px;
+            font-weight: bold;
+            position: fixed; top: 35%;
+            color: #d7d7d7;
+        }
+        .modal{
+            background: #3a3939;
+            width: 74%;
+            border-radius: 7px;
+            text-align: left;
+            color: #d7d7d7;
+        }
+        .header {
+            overflow: hidden;
+            background-color: #111111;
+            padding: 20px 10px;
+        }
+        .header a {
+            float: left;
+            color: #d7d7d7;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 18px;
+            line-height: 25px;
+            border-radius: 4px;
+        }
+
+        .header a.logo {
+            font-size: 40px;
+            font-weight: bold;
+            color: #d7d7d7;
+        }
+
+        .header a:hover {
+            background-color: #111111;
+            color: #8925c0;
+        }
+
+        .header-right {
+            float: right;
+        }
+        .button {
+            font: 1em Arial, sans-serif;
+            display: inline-block;
+            padding: 12px;
+            text-decoration: none;
+            color: #111111;
+            background-image: linear-gradient(#8925c0, rgba(137, 37, 192, 0.99)), linear-gradient(#111111, #111111);
+            background-size: 0 5px, auto;
+            background-repeat: no-repeat;
+            background-position: center bottom;
+            transition: all .2s ease-out;
+        }
+
+        .button:hover {
+            background-size: 100% 5px, auto;
+            color: #806993;
+            text-decoration: none;
+            text-decoration-color: #8925c0;
+        }
+
+        @media screen and (max-width: 650px) {
+            .header a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
+            .header-right {
+                float: none;
+            }
+        }
+        * {
+            box-sizing: border-box;
+        }
+        .registerbtn {
+            background-color: #400e96;
+            color: white;
+            padding: 20px 20px 20px;
+            margin: 0 auto;
+            display: block;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            width: 24%;
+            opacity: 0.8;
+            text-decoration: none;
+        }
+
+        .registerbtn:hover {
+            opacity: 1;
+        }
+
+        a {
+            color: #5412bb;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <a href="/homepage" class="logo">Jatel</a>
+    <div class="header-right">
+        <a class="button" th:if="${AuthorizedUser}!=null" th:href="'/person/'+${AuthorizedUser.getId()}+'/profile'">My Profile</a>
+        <a class="button" href="/homepage">Home</a>
+        <a class="button" href="/blog">Posts</a>
+        <a class="button" href="/aboutJatel">About</a>
+        <a class="button" href="/logout">Logout</a>
+    </div>
+</div>
+
+<h1 style="text-align: center; color: #d7d7d7; font-size: 80px">EDIT POST</h1>
+<div th:each="post: ${posts}">
+        <form method="post">
+            <textarea rows="2" cols="80" style="padding: 3px; position: fixed; top: 40%; left: 13%; font-size: 20px" name="title" class="modal" th:text="${post.getTitle()}" required></textarea><br>
+            <p/>
+            <textarea rows="11" cols="80" style="padding: 5px; position: fixed; top: 52%; left: 13%; font-size: 17px" name="text" class="modal" th:text="${post.getText()}" required></textarea><br>
+            <p/>
+            <button style="position: fixed; top: 88%; left: 38%;" type="submit" class="registerbtn">Edit</button>
+        </form>
+</div>
+
+</body>
+</html>

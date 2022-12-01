@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Post</title>
+    <meta name="My profile" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #111111;
+        }
+        .styletext{
+            font-size: 80px;
+            font-weight: bold;
+            position: fixed; top: 35%;
+            color: #d7d7d7;
+        }
+        .modal{
+            background: #3a3939;
+            width: 74%;
+            border-radius: 7px;
+            text-align: left;
+            color: #d7d7d7;
+        }
+        .header {
+            overflow: hidden;
+            background-color: #111111;
+            padding: 20px 10px;
+        }
+        .header a {
+            float: left;
+            color: #d7d7d7;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 18px;
+            line-height: 25px;
+            border-radius: 4px;
+        }
+
+        .header a.logo {
+            font-size: 40px;
+            font-weight: bold;
+            color: #d7d7d7;
+        }
+
+        .header a:hover {
+            background-color: #111111;
+            color: #8925c0;
+        }
+
+        .header-right {
+            float: right;
+        }
+        .button {
+            font: 1em Arial, sans-serif;
+            display: inline-block;
+            padding: 12px;
+            text-decoration: none;
+            color: #111111;
+            background-image: linear-gradient(#8925c0, rgba(137, 37, 192, 0.99)), linear-gradient(#111111, #111111);
+            background-size: 0 5px, auto;
+            background-repeat: no-repeat;
+            background-position: center bottom;
+            transition: all .2s ease-out;
+        }
+
+        .button:hover {
+            background-size: 100% 5px, auto;
+            color: #806993;
+            text-decoration: none;
+            text-decoration-color: #8925c0;
+        }
+
+        @media screen and (max-width: 650px) {
+            .header a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
+            .header-right {
+                float: none;
+            }
+        }
+        * {
+            box-sizing: border-box;
+        }
+        .registerbtn {
+            background-color: #400e96;
+            color: white;
+            padding: 20px 20px 20px;
+            margin: 0 auto;
+            display: block;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            width: 24%;
+            opacity: 0.8;
+            text-decoration: none;
+        }
+
+        .registerbtn:hover {
+            opacity: 1;
+        }
+
+        a {
+            color: #5412bb;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <a href="/homepage" class="logo">Jatel</a>
+    <div class="header-right">
+        <a class="button" th:if="${AuthorizedUser}!=null" th:href="'/person/'+${AuthorizedUser.getId()}+'/profile'">My Profile</a>
+        <a class="button" href="/homepage">Home</a>
+        <a class="button" href="/blog">Posts</a>
+        <a class="button" href="/aboutJatel">About</a>
+        <a class="button" href="/logout">Logout</a>
+    </div>
+</div>
+<div>
+    <h1 style="text-align: center; color: #d7d7d7; font-size: 80px">CREATE POST</h1>
+    <div>
+        <form th:action="@{/addblog}" method="post" th:object="${post}">
+            <input th:field="*{title}" style="padding: 20px; position: fixed; top: 40%; left: 13%;" class="modal" type="text" placeholder="Enter title"><br>
+            <p style="color: white; text-align: center; font-size: 10px" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</p>
+            <p style="color: #ff1f1f;position: fixed; top: 48%; left: 36%; font-size: 15px"><th:block th:text="${MessageTitle}"></th:block></p>
+            <p/>
+            <textarea th:field="*{text}" rows="12" cols="80" style="position: fixed; top: 54%; left: 13%;" class="modal" placeholder="Enter content"></textarea><br>
+            <p style="color: white; text-align: center; font-size: 10px" th:if="${#fields.hasErrors('text')}" th:errors="*{text}">Text Error</p>
+            <p style="color: #ff1f1f;position: fixed; top: 80%; left: 36%; font-size: 15px"><th:block th:text="${MessageText}"></th:block></p>
+            <button style="position: fixed; top: 87%; left: 38%;" type="submit" class="registerbtn">Create</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

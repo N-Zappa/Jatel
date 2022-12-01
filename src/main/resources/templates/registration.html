@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Registration</title>
+  <meta name="Login" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #111111;
+    }
+
+
+    @media screen and (max-width: 650px) {
+      .header a {
+        float: none;
+        display: block;
+        text-align: left;
+      }
+    }
+    * {
+      box-sizing: border-box;
+    }
+
+    .container {
+      padding: 10px;
+      background-color: #111111;
+    }
+
+    input[type=text], input[type=password], input[type=email] {
+      width: 80%;
+      padding: 18px;
+      border: none;
+      background: #ad71e5;
+      margin-left: 50px;
+      margin-right: 50px;
+      border-radius: 7px;
+    }
+
+    input[type=text]:focus, input[type=password]:focus {
+      background-color: #ad71e5;
+      outline: none;
+      display: block;
+      display: inline-block;
+    }
+    .form__error {
+      color: #c20d0d;
+      text-align: center;
+      font-size: 15px;
+      display: block;
+      margin-top: 3px;
+      display: none;
+    }
+    input:valid:not(:placeholder-shown) {
+      border-color: green;
+    }
+
+    input:invalid:not(:placeholder-shown) {
+      border-color: #ff1f1f;
+    }
+    input:invalid:not(:placeholder-shown) + .form__error {
+      display: block;
+    }
+    .modal{
+      padding: 20px;
+      border-radius: 7px;
+      width: 40%;
+      background: #70578d;
+      position: fixed; top: 65%; left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+
+    .registerbtn {
+      background-color: #400e96;
+      color: white;
+      padding: 20px 20px 20px;
+      margin: 0 auto;
+      display: block;
+      border: none;
+      border-radius: 5px;
+      text-align: center;
+      cursor: pointer;
+      width: 30%;
+      opacity: 0.8;
+      text-decoration: none;
+    }
+
+    .registerbtn:hover {
+      opacity: 1;
+    }
+
+    a {
+      color: #5412bb
+    }
+
+    .signin {
+      background: #111111;
+      text-align: center;
+      border-radius: 7px;
+    }
+  </style>
+</head>
+<body>
+<form action="/registration"  method="post">
+  <div class="container">
+    <h1  style="color:#B9C4C9; text-align: center; font-size: 50px">Register</h1>
+    <p  style="color:#B9C4C9; text-align: center; font-size: 20px" >Please fill in this form to create an account</p>
+    <hr>
+    <div class="modal">
+      <p style="color: white; text-align: center; font-size: 20px" th:text="${Message}"></p>
+      <input type="email" name="username" placeholder="Enter email" required>
+      <span class="form__error">Enter correct value</span>
+      <p/>
+      <input type="text" pattern="[a-zA-Z][a-zA-Z0-9-_\.]+$" maxlength="10" minlength="4" name="nameOfUser" placeholder="Enter username" required>
+      <span class="form__error">The username must contain from 4 to 10 characters start with a latin letter of any case</span>
+        <p/>
+      <input type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" name="password" maxlength="20" minlength="12" placeholder="Enter password" required>
+      <span class="form__error">The password must contain from 12 to 20 latin lowercase and uppercase letters and numbers</span>
+      <p/>
+      <button type="submit" class="registerbtn">Register</button>
+      <p/>
+      <hr>
+      <div class="container signin">
+        <p style="color:white">Already have an account? <a href="/login">Sign in</a></p>
+      </div>
+    </div>
+  </div>
+</form>
+</body>
+</html>
